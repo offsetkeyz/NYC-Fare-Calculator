@@ -1,6 +1,12 @@
 import javax.swing.*;
 import java.text.DecimalFormat;
 
+/**
+ * Calculates the best fare given days and rides.
+ *
+ * @Author Colin McAllister
+ * @Version April 30, 2020
+ */
 public class TransitCalc {
     private int numDays;
     private int numRides;
@@ -92,16 +98,21 @@ public class TransitCalc {
      * @param args not used
      */
     public static void main(String[] args) {
-        int numDays = 0;
-        int numRides = 0;
+        String input = null; // input from user as string
+        int numDays;
+        int numRides;
         int runAgain = 0;
 
         do { //loops as long as user wants
             try {
-                numDays = Integer.parseInt
-                        (JOptionPane.showInputDialog("How many days will you be riding?"));
-                numRides = Integer.parseInt
-                        (JOptionPane.showInputDialog("How many rides?"));
+                input = (JOptionPane.showInputDialog("How many days will you be riding?"));
+                if (input == null) {return;} // if user presses cancel, gtfo
+                numDays = Integer.parseInt(input);
+
+                input = (JOptionPane.showInputDialog("How many rides?"));
+                if (input == null) {return;} // if user presses cancel, gtfo
+                numRides = Integer.parseInt(input);
+
                 TransitCalc yourRecommendation = new TransitCalc(numDays, numRides);
                 JOptionPane.showMessageDialog(null, yourRecommendation.getBestFare());
 
@@ -111,7 +122,7 @@ public class TransitCalc {
                 JOptionPane.showMessageDialog(null,
                         "Please enter a positive integer.");
             }
-        } while (runAgain == 0);
+        } while ((runAgain == 0));
 
 
     }
